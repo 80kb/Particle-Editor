@@ -170,7 +170,7 @@ namespace ParticleEditor.Serial
                 Entries = new List<_TableItem>();
 
                 for (int i = 0; i < EntryAmount; i++)
-                    AddEntry(new _TableItem(reader));
+                    Entries.Add(new _TableItem(reader));
             }
 
             //////////////////////////////////////
@@ -188,16 +188,11 @@ namespace ParticleEditor.Serial
 
             public int SectionSize() 
             {
-                return 0x04 + 0x02 + 0x02;
-            }
+                int size = 0x04 + 0x02 + 0x02;
+                foreach(_TableItem item in this.Entries)
+                    size += item.SectionSize();
 
-            //////////////////////////////////////
-            //////////////////////////////////////
-
-            public void AddEntry(_TableItem entry)
-            {
-                Entries.Add(entry);
-                Length += (uint)entry.SectionSize();
+                return size;
             }
         }
 
@@ -243,6 +238,12 @@ namespace ParticleEditor.Serial
                 writer.WriteStringNT(Name);
                 writer.WriteUInt32(DataOffset);
                 writer.WriteUInt32(DataSize);
+
+                // Jump to DataOffset, write subfile bytes, jump back to previous position
+                writer.PushPosition();
+                writer.Position = (int)DataOffset + SectionSize();
+                writer.WriteBytes(Data);
+                writer.Position = writer.PopPosition();
             }
 
             public int SectionSize()
@@ -287,7 +288,7 @@ namespace ParticleEditor.Serial
             }
         }
 
-        public byte[] Write() 
+        public byte[] Write()
         {
             MemoryStream stream = new MemoryStream();
             EndianWriter writer = new EndianWriter(stream, Endianness.BigEndian);
@@ -313,22 +314,31 @@ namespace ParticleEditor.Serial
             // Header Vars
             int size = Header.SectionSize() + BlockHeader.SectionSize() + ProjectHeader.SectionSize() + Table.SectionSize();
             foreach (_TableItem item in Table.Entries)
-                size += item.SectionSize() + (int)item.DataSize;
+                size += (int)item.DataSize;
+
             Header.FileLength = (uint)size;
 
             // BlockHeader Vars
             size = ProjectHeader.SectionSize() + Table.SectionSize();
             foreach (_TableItem item in Table.Entries)
-                size += item.SectionSize() + (int)item.DataSize;
+                size += (int)item.DataSize;
 
             BlockHeader.SectionLength = (uint)size;
 
-            // Table Vars
-            size = Table.SectionSize();
-            foreach (_TableItem item in Table.Entries)
-                size += item.SectionSize();
+            // ProjectHeader Vars
+            ProjectHeader.Length = (uint)ProjectHeader.SectionSize();
 
-            Table.Length = (uint)size;
+            // Table Vars
+            Table.Length = (uint)Table.SectionSize();
+            Table.EntryAmount = (ushort)Table.Entries.Count;
+
+            // Table Items
+            size = Table.SectionSize();
+            foreach(_TableItem item in Table.Entries)
+            {
+                item.DataOffset = (ushort)size;
+                size += (int)item.DataSize + 1;
+            }
         }
     }
 }

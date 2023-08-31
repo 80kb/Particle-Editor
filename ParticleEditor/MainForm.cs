@@ -1,6 +1,4 @@
 using ParticleEditor.Serial;
-using System.Diagnostics;
-using System.Diagnostics.Contracts;
 
 namespace ParticleEditor
 {
