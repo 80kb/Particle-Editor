@@ -1,13 +1,4 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-namespace ParticleEditor.Serial
+﻿namespace ParticleEditor.Serial
 {
     public class BREFF
     {
@@ -312,7 +303,6 @@ namespace ParticleEditor.Serial
 
         private void CalculateVariables()
         {
-
             // Subfile Items
             foreach (_TableItem item in Table.Entries)
                 item.DataSize = (uint)item.Data.Length;
