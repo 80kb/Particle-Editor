@@ -178,12 +178,13 @@ namespace ParticleEditor.Serial
 
             public void Write(EndianWriter writer)
             {
+                int tableStart = writer.Position;
+
                 writer.WriteUInt32(Length);
                 writer.WriteUInt16(EntryAmount);
                 writer.WriteUInt16(Padding);
-
                 foreach (_TableItem item in Entries)
-                    item.Write(writer);
+                    item.Write(writer, tableStart);
             }
 
             public int SectionSize() 
@@ -232,7 +233,7 @@ namespace ParticleEditor.Serial
             //////////////////////////////////////
             //////////////////////////////////////
 
-            public void Write(EndianWriter writer)
+            public void Write(EndianWriter writer, int tableStart)
             {
                 writer.WriteUInt16(NameLength);
                 writer.WriteStringNT(Name);
@@ -241,7 +242,7 @@ namespace ParticleEditor.Serial
 
                 // Jump to DataOffset, write subfile bytes, jump back to previous position
                 writer.PushPosition();
-                writer.Position = (int)DataOffset + SectionSize();
+                writer.Position = (int)DataOffset + tableStart;
                 writer.WriteBytes(Data);
                 writer.Position = writer.PopPosition();
             }
@@ -311,6 +312,11 @@ namespace ParticleEditor.Serial
 
         private void CalculateVariables()
         {
+
+            // Subfile Items
+            foreach (_TableItem item in Table.Entries)
+                item.DataSize = (uint)item.Data.Length;
+
             // Header Vars
             int size = Header.SectionSize() + BlockHeader.SectionSize() + ProjectHeader.SectionSize() + Table.SectionSize();
             foreach (_TableItem item in Table.Entries)
@@ -333,11 +339,11 @@ namespace ParticleEditor.Serial
             Table.EntryAmount = (ushort)Table.Entries.Count;
 
             // Table Items
-            size = Table.SectionSize();
+            size = Table.SectionSize() + 1;
             foreach(_TableItem item in Table.Entries)
             {
                 item.DataOffset = (ushort)size;
-                size += (int)item.DataSize + 1;
+                size += (int)item.DataSize;
             }
         }
     }
