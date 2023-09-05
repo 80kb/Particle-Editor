@@ -146,6 +146,58 @@
                 Unknown2 = reader.ReadByte();
                 EnableIndirectTEV = reader.ReadByte();
             }
+
+            public void Write(EndianWriter writer)
+            {
+                writer.WriteUInt32(Unknown0);
+                writer.WriteUInt32(EmitFlags);
+                writer.WriteByte(EmitShape);
+                writer.WriteUInt16(EmitterLife);
+                writer.WriteUInt16(ParticleLife);
+                writer.WriteByte(ParticleLifeRandom);
+                writer.WriteByte(Convert.ToByte(InheritChildParticleTranslation));
+                writer.WriteByte(EmitIntervalRandom);
+                writer.WriteByte(EmitRandom);
+                writer.WriteSingle(EmissionRate);
+                writer.WriteUInt16(EmitStart);
+                writer.WriteUInt16(EmitEnd);
+                writer.WriteUInt16(EmitInterval);
+                writer.WriteByte(Convert.ToByte(InheritParticleTranslation));
+                writer.WriteByte(Convert.ToByte(InheritChildEmitterTranslation));
+                foreach (float f in EmitterDimensions)
+                    writer.WriteSingle(f);
+                writer.WriteUInt16(EmitDiversion);
+                writer.WriteByte(VelocityRandom);
+                writer.WriteByte(MomentumRandom);
+                writer.WriteSingle(PowerRadiation);
+                writer.WriteSingle(PowerYAxisValue);
+                writer.WriteSingle(PowerRandom);
+                writer.WriteSingle(PowerNormal);
+                writer.WriteSingle(DiffusionEmitterNormal);
+                writer.WriteSingle(PowerSpec);
+                writer.WriteSingle(DiffusionSpec);
+                foreach(float f in EmissionAngle)
+                    writer.WriteSingle(f);
+                foreach (float f in Scale)
+                    writer.WriteSingle(f);
+                foreach (float f in Rotation)
+                    writer.WriteSingle(f);
+                foreach (float f in Translation)
+                    writer.WriteSingle(f);
+                writer.WriteByte(LODNearestDistance);
+                writer.WriteByte(LODFarthestDistance);
+                writer.WriteByte(LODMinimalEmission);
+                writer.WriteByte(LODAlpha);
+                writer.WriteUInt32(RandomSeed);
+                writer.WriteUInt64(Unknown1);
+                writer.WriteUInt16(DrawFlagsBitfield);
+                writer.WriteByte(AlphaComparison0);
+                writer.WriteByte(AlphaComparison1);
+                writer.WriteByte(AlphaCompareOperation);
+                writer.WriteByte(TEVStageAmount);
+                writer.WriteByte(Unknown2);
+                writer.WriteByte(EnableIndirectTEV);
+            }
         }
 
         public class _Shader
