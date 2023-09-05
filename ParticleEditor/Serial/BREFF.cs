@@ -288,31 +288,6 @@
             }
         }
 
-        /// <summary>
-        /// Serializes BREFF instance to a new byte array
-        /// </summary>
-        /// <returns>BREFF file bytes</returns>
-        public byte[] Write()
-        {
-            MemoryStream stream = new MemoryStream();
-            EndianWriter writer = new EndianWriter(stream, Endianness.BigEndian);
-            try
-            {
-                CalculateVariables();
-                Header.Write(writer);
-                BlockHeader.Write(writer);
-                ProjectHeader.Write(writer);
-                Table.Write(writer);
-            }
-            finally
-            {
-                stream.Close();
-                writer.Close();
-            }
-
-            return stream.ToArray();
-        }
-
         /////////////////////////////
         /////////////////////////////
 
@@ -348,11 +323,39 @@
 
             // Table Items
             size = Table.SectionSize() + 1;
-            foreach(_TableItem item in Table.Entries)
+            foreach (_TableItem item in Table.Entries)
             {
                 item.DataOffset = (ushort)size;
                 size += (int)item.DataSize;
             }
+        }
+
+        /////////////////////////////
+        /////////////////////////////
+
+        /// <summary>
+        /// Serializes BREFF instance to a new byte array
+        /// </summary>
+        /// <returns>BREFF file bytes</returns>
+        public byte[] Write()
+        {
+            MemoryStream stream = new MemoryStream();
+            EndianWriter writer = new EndianWriter(stream, Endianness.BigEndian);
+            try
+            {
+                CalculateVariables();
+                Header.Write(writer);
+                BlockHeader.Write(writer);
+                ProjectHeader.Write(writer);
+                Table.Write(writer);
+            }
+            finally
+            {
+                stream.Close();
+                writer.Close();
+            }
+
+            return stream.ToArray();
         }
     }
 }
