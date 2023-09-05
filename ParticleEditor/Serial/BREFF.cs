@@ -253,6 +253,9 @@
         public _ProjectHeader ProjectHeader;
         public _Table Table;
 
+        /// <summary>
+        /// Create new empty BREFF
+        /// </summary>
         public BREFF()
         {
             FileName = "Untitled.breff";
@@ -262,6 +265,11 @@
             Table = new _Table();
         }
 
+        /// <summary>
+        /// Create new BREFF from byte array and filename
+        /// </summary>
+        /// <param name="buffer">File bytes</param>
+        /// <param name="filename">File path or name</param>
         public BREFF(byte[] buffer, string filename)
         {
             FileName = filename;
@@ -280,6 +288,10 @@
             }
         }
 
+        /// <summary>
+        /// Serializes BREFF instance to a new byte array
+        /// </summary>
+        /// <returns>BREFF file bytes</returns>
         public byte[] Write()
         {
             MemoryStream stream = new MemoryStream();
@@ -301,6 +313,12 @@
             return stream.ToArray();
         }
 
+        /////////////////////////////
+        /////////////////////////////
+
+        /// <summary>
+        /// Calculates the internal file data (e.g. subfile offsets)
+        /// </summary>
         private void CalculateVariables()
         {
             // Subfile Items
