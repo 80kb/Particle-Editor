@@ -1,24 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ParticleEditor.Serial
+﻿namespace ParticleEditor.Serial
 {
     public class Emitter
     {
-        public enum Shape : byte
-        {
-            Disc = 0x0,
-            Line = 0x1,
-            Cube = 0x5,
-            Cylinder = 0x7,
-            Sphere = 0x8,
-            Point = 0x9,
-            Torus = 0xA
-        }
-
         public class _Header
         {
             public uint EffectNamePointer;
@@ -43,13 +26,48 @@ namespace ParticleEditor.Serial
             }
         }
 
+        public class _ShaderStage
+        {
+            public byte Texture;
+            public byte[] ColorInputs;
+            public byte[] ColorOperations;
+            public byte[] AlphaInputs;
+            public byte[] AlphaOperations;
+
+            public _ShaderStage()
+            {
+                ColorInputs = new byte[4];
+                ColorOperations = new byte[5];
+                AlphaInputs = new byte[4];
+                AlphaOperations = new byte[5];
+            }
+
+            public _ShaderStage(EndianReader reader)
+            {
+                Texture = reader.ReadByte();
+                ColorInputs = reader.ReadBytes(4);
+                ColorOperations = reader.ReadBytes(5);
+                AlphaInputs = reader.ReadBytes(4);
+                AlphaOperations = reader.ReadBytes(5);
+            }
+
+            public void Write(EndianWriter writer)
+            {
+                writer.WriteByte(Texture);
+                writer.WriteBytes(ColorInputs);
+                writer.WriteBytes(ColorOperations);
+                writer.WriteBytes(AlphaInputs);
+                writer.WriteBytes(AlphaOperations);
+            }
+        }
+
         /////////////////////////
         /////////////////////////
 
         public _Header Header;
         public uint Unknown0;
         public uint EmitFlags;
-        public Shape EmitShape;
+        public byte EmitShape;
         public ushort EmitterLife;
         public ushort ParticleLife;
         public byte ParticleLifeRandom;
@@ -90,7 +108,5 @@ namespace ParticleEditor.Serial
         public byte TEVStageAmount;
         public byte Unknown2;
         public byte EnableIndirectTEV;
-        public byte[] TEVTextures;
-        public byte[,] TEVColorSources;
     }
 }
