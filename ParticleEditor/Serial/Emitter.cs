@@ -1,4 +1,6 @@
-﻿namespace ParticleEditor.Serial
+﻿using System.Security.Cryptography.Pkcs;
+
+namespace ParticleEditor.Serial
 {
     public class Emitter
     {
@@ -280,6 +282,116 @@
                 writer.WriteBytes(ColorOperations);
                 writer.WriteBytes(AlphaInputs);
                 writer.WriteBytes(AlphaOperations);
+            }
+        }
+
+        public class _Color
+        {
+            byte[] ConstColor;
+            byte[] ConstAlpha;
+            byte BlendMode;
+            byte BlendSourceFactor;
+            byte BlendDestFactor;
+            byte BlendOperation;
+            ulong TEVColor; // will be a struct; info hasn't yet been added to wiki
+            ulong TEVAlpha; // 
+            byte ZCompareFunction;
+            byte AlphaFlickType;
+            ushort AlphaFlickCycleLength;
+            byte AlphaFlickMax;
+            byte AlphaFlickAmplitude;
+        }
+
+        public class _Lighting
+        {
+            byte LightingMode;
+            byte LightingType;
+            byte[] LightingAmbientColor;
+            byte[] LightingDiffuseColor;
+            float LightingRadius;
+            float[] LightingPosition;
+            float[,] IndirectTextureMatrix;
+            sbyte IndirectTextureMatrixScale;
+            sbyte PivotX;
+            sbyte PivotY;
+            byte Padding;
+
+            public _Lighting(EndianReader reader)
+            {
+                LightingMode = reader.ReadByte();
+                LightingType = reader.ReadByte();
+                LightingAmbientColor = reader.ReadBytes(4);
+                LightingDiffuseColor = reader.ReadBytes(4);
+                LightingRadius = reader.ReadSingle();
+                LightingPosition = reader.ReadSingles(3);
+                IndirectTextureMatrix = new float[2, 3];
+                for(int i = 0; i < 2; i++)
+                {
+                    for(int j = 0; j < 3; j++)
+                        IndirectTextureMatrix[i, j] = reader.ReadSingle();
+                }
+                IndirectTextureMatrixScale = reader.ReadSByte();
+                PivotX = reader.ReadSByte();
+                PivotY = reader.ReadSByte();
+                Padding = reader.ReadByte();
+            }
+
+            public void Write(EndianWriter writer)
+            {
+                writer.WriteByte(LightingMode);
+                writer.WriteByte(LightingType);
+                writer.WriteBytes(LightingAmbientColor);
+                writer.WriteBytes(LightingDiffuseColor);
+                writer.WriteSingle(LightingRadius);
+                writer.WriteSingles(LightingPosition);
+                for(int i = 0; i < 2; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                        writer.WriteSingle(IndirectTextureMatrix[i, j]);
+                }
+                writer.WriteSByte(IndirectTextureMatrixScale);
+                writer.WriteSByte(PivotX);
+                writer.WriteSByte(PivotY);
+                writer.WriteByte(Padding);
+            }
+        }
+
+        public class _Movement
+        {
+            byte ParticleType;
+            byte ParticleVariant;
+            byte MovementDirection;
+            byte RotationAxis;
+            byte Setting1;
+            byte Setting2;
+            byte Setting3;
+            byte Padding;
+            float ZOffset;
+
+            public _Movement(EndianReader reader)
+            {
+                ParticleType = reader.ReadByte();
+                ParticleVariant = reader.ReadByte();
+                MovementDirection = reader.ReadByte();
+                RotationAxis = reader.ReadByte();
+                Setting1 = reader.ReadByte();
+                Setting2 = reader.ReadByte();
+                Setting3 = reader.ReadByte();
+                Padding = reader.ReadByte();
+                ZOffset = reader.ReadSingle();
+            }
+
+            public void Write(EndianWriter writer)
+            {
+                writer.WriteByte(ParticleType);
+                writer.WriteByte(ParticleVariant);
+                writer.WriteByte(MovementDirection);
+                writer.WriteByte(RotationAxis);
+                writer.WriteByte(Setting1);
+                writer.WriteByte(Setting2);
+                writer.WriteByte(Setting3);
+                writer.WriteByte(Padding);
+                writer.WriteSingle(ZOffset);
             }
         }
 
