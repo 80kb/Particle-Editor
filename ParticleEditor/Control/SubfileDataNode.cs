@@ -1,4 +1,5 @@
 ﻿using ParticleEditor.Serial;
+using System.ComponentModel;
 
 namespace ParticleEditor.Control
 {
@@ -6,9 +7,27 @@ namespace ParticleEditor.Control
     {
         BREFF._TableItem Item;
 
+        [Category("Info")]
+        public string Name
+        {
+            get { return Item.Name; }
+        }
+
+        [Category("Info")]
+        public uint DataOffset
+        {
+            get { return Item.DataOffset; }
+        }
+
+        [Category("Info")]
+        public uint DataLength
+        {
+            get { return Item.DataSize;}
+        }
+
         public SubfileDataNode(BREFF._TableItem item) : base(item.Name)
         {
-            Item = item;
+            this.Item = item;
 
             // Add Emitter
             Emitter emitter = new Emitter(item.Data);

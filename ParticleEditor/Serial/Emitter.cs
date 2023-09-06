@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography.Pkcs;
-
-namespace ParticleEditor.Serial
+﻿namespace ParticleEditor.Serial
 {
     public class Emitter
     {
@@ -204,7 +202,7 @@ namespace ParticleEditor.Serial
 
         public class _Shader
         {
-            List<_ShaderStage> ShaderStages;
+            public List<_ShaderStage> ShaderStages;
 
             public _Shader(EndianReader reader, int stageAmount)
             {

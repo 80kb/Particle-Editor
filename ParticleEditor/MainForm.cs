@@ -34,7 +34,13 @@ namespace ParticleEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void fileTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (fileTreeView.SelectedNode != null)
+                propertyGrid.SelectedObject = fileTreeView.SelectedNode.Tag;
         }
     }
 }

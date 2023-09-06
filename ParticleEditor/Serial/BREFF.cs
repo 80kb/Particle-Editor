@@ -247,10 +247,10 @@
         /////////////////////////////
         /////////////////////////////
 
-        public _Header Header;
-        public _BlockHeader BlockHeader;
-        public _ProjectHeader ProjectHeader;
-        public _Table Table;
+        public _Header Header { get; set; }
+        public _BlockHeader BlockHeader { get; set; }
+        public _ProjectHeader ProjectHeader { get; set; }
+        public _Table Table { get; set; }
 
         /// <summary>
         /// Create new empty BREFF

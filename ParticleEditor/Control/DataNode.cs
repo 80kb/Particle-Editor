@@ -8,6 +8,7 @@
         public DataNode(string name)
         {
             Node = new TreeNode(name);
+            Node.Tag = this;
             Children = new List<DataNode>();
         }
 
