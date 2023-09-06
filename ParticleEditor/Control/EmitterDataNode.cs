@@ -18,6 +18,12 @@ namespace ParticleEditor.Control
     {
         private Emitter Emitter;
 
+        [Category("Info")]
+        public uint Length
+        {
+            get { return Emitter.Header.Size; }
+        }
+
         [Category("Emit Data")]
         public uint EmitFlags
         {
