@@ -300,6 +300,40 @@ namespace ParticleEditor.Serial
             ushort AlphaFlickCycleLength;
             byte AlphaFlickMax;
             byte AlphaFlickAmplitude;
+
+            public _Color(EndianReader reader)
+            {
+                ConstColor = reader.ReadBytes(4);
+                ConstAlpha = reader.ReadBytes(4);
+                BlendMode = reader.ReadByte();
+                BlendSourceFactor = reader.ReadByte();
+                BlendDestFactor = reader.ReadByte();
+                BlendOperation = reader.ReadByte();
+                TEVColor = reader.ReadUInt64();
+                TEVAlpha = reader.ReadUInt64();
+                ZCompareFunction = reader.ReadByte();
+                AlphaFlickType = reader.ReadByte();
+                AlphaFlickCycleLength = reader.ReadUInt16();
+                AlphaFlickMax = reader.ReadByte();
+                AlphaFlickAmplitude = reader.ReadByte();
+            }
+
+            public void Write(EndianWriter writer)
+            {
+                writer.WriteBytes(ConstColor);
+                writer.WriteBytes(ConstAlpha);
+                writer.WriteByte(BlendMode);
+                writer.WriteByte(BlendSourceFactor);
+                writer.WriteByte(BlendDestFactor);
+                writer.WriteByte(BlendOperation);
+                writer.WriteUInt64(TEVColor);
+                writer.WriteUInt64(TEVAlpha);
+                writer.WriteByte(ZCompareFunction);
+                writer.WriteByte(AlphaFlickType);
+                writer.WriteUInt16(AlphaFlickCycleLength);
+                writer.WriteByte(AlphaFlickMax);
+                writer.WriteByte(AlphaFlickAmplitude);
+            }
         }
 
         public class _Lighting
@@ -401,6 +435,9 @@ namespace ParticleEditor.Serial
         public _Header Header;
         public _EmitData EmitData;
         public _Shader Shader;
+        public _Color Color;
+        public _Lighting Lighting;
+        public _Movement Movement;
         
         public Emitter(byte[] buffer)
         {
@@ -410,11 +447,36 @@ namespace ParticleEditor.Serial
                 Header = new _Header(reader);
                 EmitData = new _EmitData(reader);
                 Shader = new _Shader(reader, EmitData.TEVStageAmount);
+                Color = new _Color(reader);
+                Lighting = new _Lighting(reader);
+                Movement = new _Movement(reader);
             }
             finally
             {
                 reader.Close();
             }
+        }
+
+        public byte[] Write()
+        {
+            MemoryStream stream = new MemoryStream();
+            EndianWriter writer = new EndianWriter(stream, Endianness.BigEndian);
+            try
+            {
+                Header.Write(writer);
+                EmitData.Write(writer);
+                Shader.Write(writer);
+                Color.Write(writer);
+                Lighting.Write(writer);
+                Movement.Write(writer);
+            }
+            finally
+            {
+                writer.Close();
+                stream.Close();
+            }
+
+            return stream.ToArray();
         }
     }
 }
