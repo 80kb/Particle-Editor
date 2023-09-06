@@ -247,7 +247,6 @@
         /////////////////////////////
         /////////////////////////////
 
-        public string FileName;
         public _Header Header;
         public _BlockHeader BlockHeader;
         public _ProjectHeader ProjectHeader;
@@ -258,7 +257,6 @@
         /// </summary>
         public BREFF()
         {
-            FileName = "Untitled.breff";
             Header = new _Header();
             BlockHeader = new _BlockHeader();
             ProjectHeader = new _ProjectHeader();
@@ -270,10 +268,8 @@
         /// </summary>
         /// <param name="buffer">File bytes</param>
         /// <param name="filename">File path or name</param>
-        public BREFF(byte[] buffer, string filename)
-        {
-            FileName = filename;
-            
+        public BREFF(byte[] buffer)
+        {   
             EndianReader reader = new EndianReader(buffer, Endianness.BigEndian);
             try
             {
