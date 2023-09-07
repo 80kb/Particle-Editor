@@ -30,7 +30,7 @@ namespace ParticleEditor.Control
             this.Item = item;
 
             // Add Emitter
-            Emitter emitter = new Emitter(item.Data);
+            Emitter emitter = item.Emitter;
             EmitterDataNode emitterNode = new EmitterDataNode(emitter);
             AddChild(emitterNode);
         }

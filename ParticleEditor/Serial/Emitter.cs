@@ -75,7 +75,7 @@
             public _EmitData(EndianReader reader)
             {
                 Unknown0 = reader.ReadUInt32();
-                EmitFlags = reader.ReadUInt32();
+                EmitFlags = reader.ReadUInt24();
                 EmitShape = reader.ReadByte();
                 EmitterLife = reader.ReadUInt16();
                 ParticleLife = reader.ReadUInt16();
@@ -436,45 +436,25 @@
         public _Color Color;
         public _Lighting Lighting;
         public _Movement Movement;
-        
-        public Emitter(byte[] buffer)
+
+        public Emitter(EndianReader reader)
         {
-            EndianReader reader = new EndianReader(buffer, Endianness.BigEndian);
-            try
-            {
-                Header = new _Header(reader);
-                EmitData = new _EmitData(reader);
-                Shader = new _Shader(reader, EmitData.TEVStageAmount);
-                Color = new _Color(reader);
-                Lighting = new _Lighting(reader);
-                Movement = new _Movement(reader);
-            }
-            finally
-            {
-                reader.Close();
-            }
+            Header = new _Header(reader);
+            EmitData = new _EmitData(reader);
+            Shader = new _Shader(reader, EmitData.TEVStageAmount);
+            Color = new _Color(reader);
+            Lighting = new _Lighting(reader);
+            Movement = new _Movement(reader);
         }
 
-        public byte[] Write()
+        public void Write(EndianWriter writer)
         {
-            MemoryStream stream = new MemoryStream();
-            EndianWriter writer = new EndianWriter(stream, Endianness.BigEndian);
-            try
-            {
-                Header.Write(writer);
-                EmitData.Write(writer);
-                Shader.Write(writer);
-                Color.Write(writer);
-                Lighting.Write(writer);
-                Movement.Write(writer);
-            }
-            finally
-            {
-                writer.Close();
-                stream.Close();
-            }
-
-            return stream.ToArray();
+            Header.Write(writer);
+            EmitData.Write(writer);
+            Shader.Write(writer);
+            Color.Write(writer);
+            Lighting.Write(writer);
+            Movement.Write(writer);
         }
     }
 }

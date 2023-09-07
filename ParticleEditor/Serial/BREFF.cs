@@ -1,4 +1,6 @@
-﻿namespace ParticleEditor.Serial
+﻿using System.Diagnostics;
+
+namespace ParticleEditor.Serial
 {
     public class BREFF
     {
@@ -194,7 +196,7 @@
             public string Name;
             public uint DataOffset;
             public uint DataSize;
-            public byte[] Data;
+            public Emitter Emitter;
 
             public _TableItem()
             {
@@ -202,7 +204,6 @@
                 Name = "";
                 NameLength = 1;
                 DataSize = 0;
-                Data = new byte[0];
             }
 
             public _TableItem(EndianReader reader)
@@ -214,9 +215,10 @@
 
                 int tableStartPos = reader.PeekPosition();
                 reader.PushPosition();
+                Debug.WriteLine(tableStartPos + (int)DataOffset);
                 reader.Position = tableStartPos + (int)DataOffset;
 
-                Data = reader.ReadBytes((int)DataSize);
+                Emitter = new Emitter(reader);
 
                 reader.Position = reader.PopPosition();
             }
@@ -234,7 +236,7 @@
                 // Jump to DataOffset, write subfile bytes, jump back to previous position
                 writer.PushPosition();
                 writer.Position = (int)DataOffset + tableStart;
-                writer.WriteBytes(Data);
+                Emitter.Write(writer);
                 writer.Position = writer.PopPosition();
             }
 
@@ -292,10 +294,6 @@
         /// </summary>
         private void CalculateVariables()
         {
-            // Subfile Items
-            foreach (_TableItem item in Table.Entries)
-                item.DataSize = (uint)item.Data.Length;
-
             // Header Vars
             int size = Header.SectionSize() + BlockHeader.SectionSize() + ProjectHeader.SectionSize() + Table.SectionSize();
             foreach (_TableItem item in Table.Entries)
