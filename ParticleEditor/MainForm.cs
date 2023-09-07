@@ -30,11 +30,6 @@ namespace ParticleEditor
             }
         }
 
-        private void newToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Breff == null)
