@@ -306,19 +306,19 @@
 
         public class _Color
         {
-            byte[] ConstColor;
-            byte[] ConstAlpha;
-            byte BlendMode;
-            byte BlendSourceFactor;
-            byte BlendDestFactor;
-            byte BlendOperation;
-            ulong TEVColor; // will be a struct; info hasn't yet been added to wiki
-            ulong TEVAlpha; // 
-            byte ZCompareFunction;
-            byte AlphaFlickType;
-            ushort AlphaFlickCycleLength;
-            byte AlphaFlickMax;
-            byte AlphaFlickAmplitude;
+            public byte[] ConstColor;
+            public byte[] ConstAlpha;
+            public byte BlendMode;
+            public byte BlendSourceFactor;
+            public byte BlendDestFactor;
+            public byte BlendOperation;
+            public ulong TEVColor; // will be a struct; info hasn't yet been added to wiki
+            public ulong TEVAlpha; // 
+            public byte ZCompareFunction;
+            public byte AlphaFlickType;
+            public ushort AlphaFlickCycleLength;
+            public byte AlphaFlickMax;
+            public byte AlphaFlickAmplitude;
 
             public _Color(EndianReader reader)
             {
@@ -357,17 +357,17 @@
 
         public class _Lighting
         {
-            byte LightingMode;
-            byte LightingType;
-            byte[] LightingAmbientColor;
-            byte[] LightingDiffuseColor;
-            float LightingRadius;
-            float[] LightingPosition;
-            float[,] IndirectTextureMatrix;
-            sbyte IndirectTextureMatrixScale;
-            sbyte PivotX;
-            sbyte PivotY;
-            byte Padding;
+            public byte LightingMode;
+            public byte LightingType;
+            public byte[] LightingAmbientColor;
+            public byte[] LightingDiffuseColor;
+            public float LightingRadius;
+            public float[] LightingPosition;
+            public float[,] IndirectTextureMatrix;
+            public sbyte IndirectTextureMatrixScale;
+            public sbyte PivotX;
+            public sbyte PivotY;
+            public byte Padding;
 
             public _Lighting(EndianReader reader)
             {
@@ -411,15 +411,15 @@
 
         public class _Movement
         {
-            byte ParticleType;
-            byte ParticleVariant;
-            byte MovementDirection;
-            byte RotationAxis;
-            byte Setting1;
-            byte Setting2;
-            byte Setting3;
-            byte Padding;
-            float ZOffset;
+            public byte ParticleType;
+            public byte ParticleVariant;
+            public byte MovementDirection;
+            public byte RotationAxis;
+            public byte Setting1;
+            public byte Setting2;
+            public byte Setting3;
+            public byte Padding;
+            public float ZOffset;
 
             public _Movement(EndianReader reader)
             {
