@@ -6,7 +6,7 @@ namespace ParticleEditor.Control
     {
         Emitter._ShaderStage ShaderStage;
 
-        public ShaderStageDataNode(Emitter._ShaderStage shaderStage, int index) : base("Shader " + index)
+        public ShaderStageDataNode(Emitter._ShaderStage shaderStage, int index) : base("TEV Stage " + index)
         {
             this.ShaderStage = shaderStage;
         }

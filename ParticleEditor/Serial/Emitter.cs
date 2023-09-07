@@ -203,43 +203,64 @@
         public class _Shader
         {
             public List<_ShaderStage> ShaderStages;
+            public byte[] Textures;
+            public byte[][] ColorInputs;
+            public byte[][] ColorOperations;
+            public byte[][] AlphaInputs;
+            public byte[][] AlphaOperations;
 
             public _Shader(EndianReader reader, int stageAmount)
             {
-                byte[] textures = reader.ReadBytes(stageAmount);
-                byte[][] colorInputs = new byte[stageAmount][];
-                for (int i = 0; i < stageAmount; i++)
-                    colorInputs[i] = reader.ReadBytes(4);
+                Textures = reader.ReadBytes(4);
+                ColorInputs = new byte[4][];
+                for (int i = 0; i < 4; i++)
+                    ColorInputs[i] = reader.ReadBytes(4);
 
-                byte[][] colorOperations = new byte[stageAmount][];
-                for (int i = 0; i < stageAmount; i++)
-                    colorOperations[i] = reader.ReadBytes(5);
+                ColorOperations = new byte[4][];
+                for (int i = 0; i < 4; i++)
+                    ColorOperations[i] = reader.ReadBytes(5);
 
-                byte[][] alphaInputs = new byte[stageAmount][];
-                for (int i = 0; i < stageAmount; i++)
-                    alphaInputs[i] = reader.ReadBytes(4);
+                AlphaInputs = new byte[4][];
+                for (int i = 0; i < 4; i++)
+                    AlphaInputs[i] = reader.ReadBytes(4);
 
-                byte[][] alphaOperations = new byte[stageAmount][];
-                for (int i = 0; i < stageAmount; i++)
-                    alphaOperations[i] = reader.ReadBytes(5);
+                AlphaOperations = new byte[4][];
+                for (int i = 0; i < 4; i++)
+                    AlphaOperations[i] = reader.ReadBytes(5);
 
                 ShaderStages = new List<_ShaderStage>();
                 for(int i = 0; i< stageAmount; i++)
                 {
                     ShaderStages.Add(new _ShaderStage(
-                        textures[i],
-                        colorInputs[i],
-                        colorOperations[i],
-                        alphaInputs[i],
-                        alphaOperations[i]
+                        Textures[i],
+                        ColorInputs[i],
+                        ColorOperations[i],
+                        AlphaInputs[i],
+                        AlphaOperations[i]
                     ));
                 }
             }
 
             public void Write(EndianWriter writer)
             {
-                foreach (_ShaderStage stage in ShaderStages)
-                    stage.Write(writer);
+                for(int i = 0; i < ShaderStages.Count; i++)
+                {
+                    Textures[i] = ShaderStages[i].Texture;
+                    ColorInputs[i] = ShaderStages[i].ColorInputs;
+                    ColorOperations[i] = ShaderStages[i].ColorOperations;
+                    AlphaInputs[i] = ShaderStages[i].AlphaInputs;
+                    AlphaOperations[i] = ShaderStages[i].AlphaOperations;
+                }
+
+                writer.WriteBytes(Textures);
+                for (int i = 0; i < 4; i++)
+                    writer.WriteBytes(ColorInputs[i]);
+                for (int i = 0; i < 4; i++)
+                    writer.WriteBytes(ColorOperations[i]);
+                for (int i = 0; i < 4; i++)
+                    writer.WriteBytes(AlphaInputs[i]);
+                for (int i = 0; i < 4; i++)
+                    writer.WriteBytes(AlphaOperations[i]);
             }
         }
 

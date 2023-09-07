@@ -215,7 +215,6 @@ namespace ParticleEditor.Serial
 
                 int tableStartPos = reader.PeekPosition();
                 reader.PushPosition();
-                Debug.WriteLine(tableStartPos + (int)DataOffset);
                 reader.Position = tableStartPos + (int)DataOffset;
 
                 Emitter = new Emitter(reader);
