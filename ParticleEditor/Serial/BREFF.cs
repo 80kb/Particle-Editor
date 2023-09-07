@@ -197,14 +197,7 @@ namespace ParticleEditor.Serial
             public uint DataOffset;
             public uint DataSize;
             public Emitter Emitter;
-
-            public _TableItem()
-            {
-                NameLength = 0;
-                Name = "";
-                NameLength = 1;
-                DataSize = 0;
-            }
+            public Particle Particle;
 
             public _TableItem(EndianReader reader)
             {
@@ -218,6 +211,7 @@ namespace ParticleEditor.Serial
                 reader.Position = tableStartPos + (int)DataOffset;
 
                 Emitter = new Emitter(reader);
+                Particle = new Particle(reader);
 
                 reader.Position = reader.PopPosition();
             }
