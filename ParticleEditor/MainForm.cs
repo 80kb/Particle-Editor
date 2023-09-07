@@ -5,6 +5,8 @@ namespace ParticleEditor
 {
     public sealed partial class MainForm : Form
     {
+        BREFF? Breff;
+
         public MainForm()
         {
             InitializeComponent();
@@ -20,9 +22,10 @@ namespace ParticleEditor
             ofd.Multiselect = false;
             if (ofd.ShowDialog() == DialogResult.OK)
             {
+                fileTreeView.Nodes.Clear();
                 byte[] buffer = File.ReadAllBytes(ofd.FileName);
-                BREFF breff = new BREFF(buffer);
-                BREFFDataNode breffNode = new BREFFDataNode(breff);
+                Breff = new BREFF(buffer);
+                BREFFDataNode breffNode = new BREFFDataNode(Breff);
                 fileTreeView.Nodes.Add(breffNode.GetTreeNode());
             }
         }
@@ -34,7 +37,16 @@ namespace ParticleEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (Breff == null)
+                return;
 
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.FileName = Breff.ProjectHeader.Name;
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                byte[] buffer = Breff.Write();
+                File.WriteAllBytes(sfd.FileName, buffer);
+            }
         }
 
         private void fileTreeView_AfterSelect(object sender, TreeViewEventArgs e)

@@ -24,6 +24,12 @@ namespace ParticleEditor.Control
             get { return Emitter.Header.Size; }
         }
 
+        [Category("Info")]
+        public byte TEVStageAmount
+        {
+            get { return Emitter.EmitData.TEVStageAmount; }
+        }
+
         [Category("Emit Data")]
         public uint EmitFlags
         {

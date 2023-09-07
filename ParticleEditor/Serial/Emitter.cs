@@ -150,7 +150,7 @@
             public void Write(EndianWriter writer)
             {
                 writer.WriteUInt32(Unknown0);
-                writer.WriteUInt32(EmitFlags);
+                writer.WriteUInt24(EmitFlags);
                 writer.WriteByte(EmitShape);
                 writer.WriteUInt16(EmitterLife);
                 writer.WriteUInt16(ParticleLife);
