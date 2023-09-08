@@ -229,7 +229,10 @@ namespace ParticleEditor.Serial
                 // Jump to DataOffset, write subfile bytes, jump back to previous position
                 writer.PushPosition();
                 writer.Position = (int)DataOffset + tableStart;
+
                 Emitter.Write(writer);
+                Particle.Write(writer);
+
                 writer.Position = writer.PopPosition();
             }
 
