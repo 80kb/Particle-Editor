@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace ParticleEditor.Serial
+﻿namespace ParticleEditor.Serial
 {
     public class BREFF
     {
