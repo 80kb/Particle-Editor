@@ -10,6 +10,13 @@
             Node = new TreeNode(name);
             Node.Tag = this;
             Children = new List<DataNode>();
+            SetImage("box");
+        }
+
+        public virtual void SetImage(string id)
+        {
+            Node.ImageKey = id;
+            Node.SelectedImageKey = id;
         }
 
         public virtual TreeNode GetTreeNode() { return this.Node; }

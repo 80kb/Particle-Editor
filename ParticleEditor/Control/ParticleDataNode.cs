@@ -268,6 +268,7 @@ namespace ParticleEditor.Control
         public ParticleDataNode(Particle particle) : base("Particle")
         {
             this.Particle = particle;
+            SetImage("bolt");
         }
     }
 }

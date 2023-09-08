@@ -206,6 +206,7 @@ namespace ParticleEditor.Control
         public ShaderStageDataNode(Emitter._ShaderStage shaderStage, int index) : base("TEV Stage " + index)
         {
             this.ShaderStage = shaderStage;
+            SetImage("page");
         }
     }
 }

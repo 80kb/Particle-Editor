@@ -28,6 +28,7 @@ namespace ParticleEditor.Control
         public SubfileDataNode(BREFF._TableItem item) : base(item.Name)
         {
             this.Item = item;
+            SetImage("page");
 
             // Add Emitter
             AddChild(new EmitterDataNode(item.Emitter));

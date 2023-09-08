@@ -1,15 +1,37 @@
 using ParticleEditor.Control;
 using ParticleEditor.Serial;
+using System.Windows.Forms;
 
 namespace ParticleEditor
 {
+
+
     public sealed partial class MainForm : Form
     {
+        static ImageList _imageList;
+        public static ImageList ImageList
+        {
+            get
+            {
+                if (_imageList == null)
+                {
+                    _imageList = new ImageList();
+                    _imageList.Images.Add("page", Properties.Resources.page);
+                    _imageList.Images.Add("box", Properties.Resources.box);
+                    _imageList.Images.Add("folder", Properties.Resources.folder);
+                    _imageList.Images.Add("light", Properties.Resources.light);
+                    _imageList.Images.Add("bolt", Properties.Resources.bolt);
+                }
+                return _imageList;
+            }
+        }
+
         BREFF? Breff;
 
         public MainForm()
         {
             InitializeComponent();
+            fileTreeView.ImageList = ImageList;
         }
 
         ///////////////////////////////////

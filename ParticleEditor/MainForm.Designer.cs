@@ -40,6 +40,7 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.BackColor = SystemColors.ControlLight;
             menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
@@ -49,7 +50,9 @@
             // 
             // fileToolStripMenuItem
             // 
+            fileToolStripMenuItem.BackColor = Color.Transparent;
             fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { openToolStripMenuItem, saveToolStripMenuItem });
+            fileToolStripMenuItem.ForeColor = Color.Black;
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new Size(37, 20);
             fileToolStripMenuItem.Text = "File";
@@ -91,6 +94,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLight;
             ClientSize = new Size(800, 450);
             Controls.Add(propertyGrid);
             Controls.Add(fileTreeView);

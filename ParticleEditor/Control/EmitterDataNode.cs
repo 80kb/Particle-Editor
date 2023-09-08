@@ -707,6 +707,7 @@ namespace ParticleEditor.Control
         public EmitterDataNode(Emitter emitter) : base("Emitter")
         {
             this.Emitter = emitter;
+            SetImage("light");
 
             for(int i = 0; i < emitter.Shader.ShaderStages.Count; i++)
             {
