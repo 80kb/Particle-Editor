@@ -1,4 +1,4 @@
-namespace ParticleEditor
+﻿namespace ParticleEditor
 {
     internal static class Program
     {

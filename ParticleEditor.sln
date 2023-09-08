@@ -5,7 +5,9 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParticleEditor", "ParticleEditor\ParticleEditor.csproj", "{7A1E89D1-166A-42D5-8B78-FFCE3AAC114A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WexosEndianLibrary", "WexosEndianLibrary\WexosEndianLibrary.csproj", "{F3AAA0D9-A52A-40CB-82E6-C69B7F3CE38A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WexosEndianLibrary", "WexosEndianLibrary\WexosEndianLibrary.csproj", "{F3AAA0D9-A52A-40CB-82E6-C69B7F3CE38A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Particle Editor", "Particle Editor\Particle Editor.csproj", "{FADBE300-8A5F-48D4-A81D-83E7823AB2D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{F3AAA0D9-A52A-40CB-82E6-C69B7F3CE38A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3AAA0D9-A52A-40CB-82E6-C69B7F3CE38A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3AAA0D9-A52A-40CB-82E6-C69B7F3CE38A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FADBE300-8A5F-48D4-A81D-83E7823AB2D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADBE300-8A5F-48D4-A81D-83E7823AB2D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FADBE300-8A5F-48D4-A81D-83E7823AB2D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FADBE300-8A5F-48D4-A81D-83E7823AB2D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
