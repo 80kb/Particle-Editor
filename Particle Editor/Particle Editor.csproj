@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="breff_icon.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DynamicAero2" Version="1.2.1" />
   </ItemGroup>
 
@@ -16,6 +20,10 @@
     <ProjectReference Include="..\WexosEndianLibrary\WexosEndianLibrary.csproj">
       <Private>True</Private>
     </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="breff_icon.jpg" />
   </ItemGroup>
 
 </Project>
