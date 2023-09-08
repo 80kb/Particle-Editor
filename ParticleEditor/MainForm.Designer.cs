@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             openToolStripMenuItem = new ToolStripMenuItem();
@@ -57,7 +58,7 @@
             // 
             openToolStripMenuItem.Image = Properties.Resources.folder;
             openToolStripMenuItem.Name = "openToolStripMenuItem";
-            openToolStripMenuItem.Size = new Size(180, 22);
+            openToolStripMenuItem.Size = new Size(121, 22);
             openToolStripMenuItem.Text = "Open";
             openToolStripMenuItem.Click += openToolStripMenuItem_Click;
             // 
@@ -65,7 +66,7 @@
             // 
             saveToolStripMenuItem.Image = Properties.Resources.disk;
             saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            saveToolStripMenuItem.Size = new Size(180, 22);
+            saveToolStripMenuItem.Size = new Size(121, 22);
             saveToolStripMenuItem.Text = "Save as...";
             saveToolStripMenuItem.Click += saveToolStripMenuItem_Click;
             // 
@@ -94,6 +95,7 @@
             Controls.Add(propertyGrid);
             Controls.Add(fileTreeView);
             Controls.Add(menuStrip1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
             Name = "MainForm";
             Text = "Particle Editor";

@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>reff.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="reff.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WexosEndianLibrary\WexosEndianLibrary.csproj">
