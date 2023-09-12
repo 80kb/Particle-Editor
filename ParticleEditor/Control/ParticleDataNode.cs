@@ -89,70 +89,70 @@ namespace ParticleEditor.Control
         }
 
         [Category("Transform")]
-        public float[] Size
+        public Vector2f Size
         {
             get { return Particle.ParticleData.Size; }
             set { Particle.ParticleData.Size = value; }
         }
 
         [Category("Transform")]
-        public float[] Scale
+        public Vector2f Scale
         {
             get { return Particle.ParticleData.Scale; }
             set { Particle.ParticleData.Scale = value; }
         }
 
         [Category("Transform")]
-        public float[] Rotation
+        public Vector3f Rotation
         {
             get { return Particle.ParticleData.Rotation; }
             set { Particle.ParticleData.Rotation = value; }
         }
 
         [Category("Texture Transform")]
-        public float[] TextureScale1
+        public Vector2f TextureScale1
         {
             get { return Particle.ParticleData.TextureScale1; }
             set { Particle.ParticleData.TextureScale1 = value; }
         }
 
         [Category("Texture Transform")]
-        public float[] TextureScale2
+        public Vector2f TextureScale2
         {
             get { return Particle.ParticleData.TextureScale2; }
             set { Particle.ParticleData.TextureScale2 = value; }
         }
 
         [Category("Texture Transform")]
-        public float[] TextureScale3
+        public Vector2f TextureScale3
         {
             get { return Particle.ParticleData.TextureScale3; }
             set { Particle.ParticleData.TextureScale3 = value; }
         }
 
         [Category("Texture Transform")]
-        public float[] TextureRotation
+        public Vector3f TextureRotation
         {
             get { return Particle.ParticleData.TextureRotation; }
             set { Particle.ParticleData.TextureRotation = value; }
         }
 
         [Category("Texture Transform")]
-        public float[] TextureTranslate1
+        public Vector2f TextureTranslate1
         {
             get { return Particle.ParticleData.TextureTranslate1; }
             set { Particle.ParticleData.TextureTranslate1 = value; }
         }
 
         [Category("Texture Transform")]
-        public float[] TextureTranslate2
+        public Vector2f TextureTranslate2
         {
             get { return Particle.ParticleData.TextureTranslate2; }
             set { Particle.ParticleData.TextureTranslate2 = value; }
         }
 
         [Category("Texture Transform")]
-        public float[] TextureTranslate3
+        public Vector2f TextureTranslate3
         {
             get { return Particle.ParticleData.TextureTranslate3; }
             set { Particle.ParticleData.TextureTranslate3 = value; }
