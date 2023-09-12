@@ -1,11 +1,8 @@
 using ParticleEditor.Control;
 using ParticleEditor.Serial;
-using System.Windows.Forms;
 
 namespace ParticleEditor
-{
-
-
+{ 
     public sealed partial class MainForm : Form
     {
         static ImageList _imageList;

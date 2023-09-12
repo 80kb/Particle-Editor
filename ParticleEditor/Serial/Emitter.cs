@@ -54,10 +54,10 @@
             public float DiffusionEmitterNormal;
             public float PowerSpec;
             public float DiffusionSpec;
-            public float[] EmissionAngle;
-            public float[] Scale;
-            public float[] Rotation;
-            public float[] Translation;
+            public Vector3f EmissionAngle;
+            public Vector3f Scale;
+            public Vector3f Rotation;
+            public Vector3f Translation;
             public byte LODNearestDistance;
             public byte LODFarthestDistance;
             public byte LODMinimalEmission;
@@ -108,30 +108,30 @@
                 DiffusionEmitterNormal = reader.ReadSingle();
                 PowerSpec = reader.ReadSingle();
                 DiffusionSpec = reader.ReadSingle();
-                EmissionAngle = new float[3]
-                {
+                EmissionAngle = new Vector3f
+                (
                     reader.ReadSingle(),
                     reader.ReadSingle(),
                     reader.ReadSingle()
-                };
-                Scale = new float[3]
-                {
+                );
+                Scale = new Vector3f
+                (
                     reader.ReadSingle(),
                     reader.ReadSingle(),
                     reader.ReadSingle()
-                };
-                Rotation = new float[3]
-                {
+                );
+                Rotation = new Vector3f
+                (
                     reader.ReadSingle(),
                     reader.ReadSingle(),
                     reader.ReadSingle()
-                };
-                Translation = new float[3]
-                {
+                );
+                Translation = new Vector3f
+                (
                     reader.ReadSingle(),
                     reader.ReadSingle(),
                     reader.ReadSingle()
-                };
+                );
                 LODNearestDistance = reader.ReadByte();
                 LODFarthestDistance = reader.ReadByte();
                 LODMinimalEmission = reader.ReadByte();
@@ -176,14 +176,22 @@
                 writer.WriteSingle(DiffusionEmitterNormal);
                 writer.WriteSingle(PowerSpec);
                 writer.WriteSingle(DiffusionSpec);
-                foreach(float f in EmissionAngle)
-                    writer.WriteSingle(f);
-                foreach (float f in Scale)
-                    writer.WriteSingle(f);
-                foreach (float f in Rotation)
-                    writer.WriteSingle(f);
-                foreach (float f in Translation)
-                    writer.WriteSingle(f);
+                
+                writer.WriteSingle(EmissionAngle.X);
+                writer.WriteSingle(EmissionAngle.Y);
+                writer.WriteSingle(EmissionAngle.Z);
+
+                writer.WriteSingle(Scale.X);
+                writer.WriteSingle(Scale.Y);
+                writer.WriteSingle(Scale.Z);
+
+                writer.WriteSingle(Rotation.X);
+                writer.WriteSingle(Rotation.Y);
+                writer.WriteSingle(Rotation.Z);
+
+                writer.WriteSingle(Translation.X);
+                writer.WriteSingle(Translation.Y);
+                writer.WriteSingle(Translation.Z);
                 writer.WriteByte(LODNearestDistance);
                 writer.WriteByte(LODFarthestDistance);
                 writer.WriteByte(LODMinimalEmission);
@@ -362,7 +370,7 @@
             public byte[] LightingAmbientColor;
             public byte[] LightingDiffuseColor;
             public float LightingRadius;
-            public float[] LightingPosition;
+            public Vector3f LightingPosition;
             public float[,] IndirectTextureMatrix;
             public sbyte IndirectTextureMatrixScale;
             public sbyte PivotX;

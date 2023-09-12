@@ -1,5 +1,6 @@
 ﻿using ParticleEditor.Serial;
 using System.ComponentModel;
+using System.Numerics;
 
 namespace ParticleEditor.Control
 {
@@ -453,28 +454,28 @@ namespace ParticleEditor.Control
         }
 
         [Category("Transform")]
-        public float[] EmissionAngle
+        public Vector3f EmissionAngle
         {
             get { return Emitter.EmitData.EmissionAngle; }
             set { Emitter.EmitData.EmissionAngle = value; }
         }
 
         [Category("Transform")]
-        public float[] Scale
+        public Vector3f Scale
         {
             get { return Emitter.EmitData.Scale; }
             set { Emitter.EmitData.Scale = value; }
         }
 
         [Category("Transform")]
-        public float[] Rotation
+        public Vector3f Rotation
         {
             get { return Emitter.EmitData.Rotation; }
             set { Emitter.EmitData.Rotation = value; }
         }
 
         [Category("Transform")]
-        public float[] Translation
+        public Vector3f Translation
         {
             get { return Emitter.EmitData.Translation; }
             set { Emitter.EmitData.Translation = value; }
@@ -593,17 +594,43 @@ namespace ParticleEditor.Control
         }
 
         [Category("Lighting")]
-        public byte[] LightingAmbientColor
+        public Color LightingAmbientColor
         {
-            get { return Emitter.Lighting.LightingAmbientColor; }
-            set { Emitter.Lighting.LightingAmbientColor = value; }
+            get 
+            {
+                return Color.FromArgb(
+                    255,
+                    Emitter.Lighting.LightingAmbientColor[0],
+                    Emitter.Lighting.LightingAmbientColor[1],
+                    Emitter.Lighting.LightingAmbientColor[2]
+                );
+            }
+            set 
+            {
+                Emitter.Lighting.LightingAmbientColor[0] = value.R; 
+                Emitter.Lighting.LightingAmbientColor[1] = value.G; 
+                Emitter.Lighting.LightingAmbientColor[2] = value.B; 
+            }
         }
 
         [Category("Lighting")]
-        public byte[] LightingDiffuseColor
+        public Color LightingDiffuseColor
         {
-            get { return Emitter.Lighting.LightingDiffuseColor; }
-            set { Emitter.Lighting.LightingDiffuseColor = value; }
+            get
+            {
+                return Color.FromArgb(
+                    255,
+                    Emitter.Lighting.LightingDiffuseColor[0],
+                    Emitter.Lighting.LightingDiffuseColor[1],
+                    Emitter.Lighting.LightingDiffuseColor[2]
+                );
+            }
+            set
+            {
+                Emitter.Lighting.LightingDiffuseColor[0] = value.R;
+                Emitter.Lighting.LightingDiffuseColor[1] = value.G;
+                Emitter.Lighting.LightingDiffuseColor[2] = value.B;
+            }
         }
 
         [Category("Lighting")]
@@ -614,7 +641,7 @@ namespace ParticleEditor.Control
         }
 
         [Category("Lighting")]
-        public float[] LightingPosition
+        public Vector3f LightingPosition
         {
             get { return Emitter.Lighting.LightingPosition; }
             set { Emitter.Lighting.LightingPosition = value; }
