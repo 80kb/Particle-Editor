@@ -5,7 +5,7 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ParticleEditor", "ParticleEditor\ParticleEditor.csproj", "{7A1E89D1-166A-42D5-8B78-FFCE3AAC114A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndianLibrary", "WexosEndianLibrary\EndianLibrary.csproj", "{F3AAA0D9-A52A-40CB-82E6-C69B7F3CE38A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EndianLibrary", "EndianLibrary\EndianLibrary.csproj", "{F3AAA0D9-A52A-40CB-82E6-C69B7F3CE38A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
