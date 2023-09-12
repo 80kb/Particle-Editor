@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WexosEndianLibrary\WexosEndianLibrary.csproj">
+    <ProjectReference Include="..\WexosEndianLibrary\EndianLibrary.csproj">
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
