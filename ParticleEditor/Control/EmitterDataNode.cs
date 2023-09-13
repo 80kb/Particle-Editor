@@ -547,15 +547,15 @@ namespace ParticleEditor.Control
         [Category("Blending")]
         public BlendOperation BlendOperation
         {
-            get { return (BlendOperation)Emitter.Color.BlendDestFactor; }
-            set { Emitter.Color.BlendDestFactor = (byte)value; }
+            get { return (BlendOperation)Emitter.Color.BlendOperation; }
+            set { Emitter.Color.BlendOperation = (byte)value; }
         }
 
         [Category("Alpha Flick")]
         public AlphaFlickType AlphaFlickType
         {
             get { return (AlphaFlickType)Emitter.Color.AlphaFlickType; }
-            set { Emitter.Color.BlendDestFactor = (byte)value; }
+            set { Emitter.Color.AlphaFlickType = (byte)value; }
         }
 
         [Category("Alpha Flick")]
